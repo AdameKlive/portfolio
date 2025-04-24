@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AdameK – Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      margin: 0;
+      background: #f4f4f4;
+      color: #333;
+      transition: background 0.3s;
+    }
+
+    /* Pasek nawigacyjny – sticky */
+    header {
+      background: #00435a;
+      color: white;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    header img {
+      width: 50px;
+      cursor: pointer;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 2.5rem;
+      text-align: center;
+      flex-grow: 1;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: white;
+      font-weight: bold;
+    }
+
+    .nav-links a:hover {
+      text-decoration: underline;
+    }
+
+    /* Sekcja główna z tłem */
+    .main-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: 4rem;
+      background: #02a3da; /* Blue background */
+    }
+
+    .main-content img {
+      width: 150px;
+      border-radius: 50%;
+      margin-bottom: 1rem;
+    }
+
+    .main-content h1 {
+      font-size: 2.5rem;
+      margin: 0;
+      color: white;
+    }
+
+    .main-content p {
+      font-size: 1.2rem;
+      color: #fff;
+      margin: 0.5rem 0;
+    }
+
+    /* Sekcja portfolio */
+    .portfolio {
+      text-align: center;
+      padding: 3rem;
+      background: #f4f4f4;
+    }
+
+    .portfolio h2 {
+      font-size: 3rem;
+      color: #333;
+      margin-bottom: 2rem;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Ustawienie maksymalnie 4 kafelków na szerokość */
+      gap: 1rem;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .card {
+      background: white;
+      border-radius: 16px;
+      padding: 1rem;
+      text-align: center;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      transition: transform 0.2s;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .card:hover {
+      transform: scale(1.05);
+    }
+
+    .card img {
+      width: 100%;
+      border-radius: 12px;
+    }
+
+    /* Sekcja "O mnie" */
+    .about {
+      background: #02a3da; /* Blue background */
+      padding: 3rem;
+      text-align: center;
+    }
+
+    .about h2 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      color: white;
+    }
+
+    .about p {
+      color: white;
+    }
+
+    /* Sekcja kontakt */
+    .contact {
+      padding: 5rem 2rem;
+      background: #f4f4f4;
+      text-align: center;
+    }
+
+    .contact h2 {
+      font-size: 3rem;
+      margin-bottom: 2rem;
+      color: #333;
+    }
+
+    .contact .contact-info {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 3rem;
+    }
+
+    .contact .contact-info p {
+      font-size: 1.2rem;
+      color: #333;
+      margin: 0.5rem 0; /* Dodane marginesy między wierszami */
+    }
+
+    .contact form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.5rem;
+      width: 100%;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    input, textarea {
+      padding: 1rem;
+      width: 100%;
+      border-radius: 8px;
+      border: 1px solid #ddd;
+      font-size: 1rem;
+    }
+
+    button {
+      background: #02a3da;
+      color: white;
+      padding: 1rem 3rem;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      font-size: 1.2rem;
+      transition: background 0.3s;
+    }
+
+    button:hover {
+      background: #0290c0;
+    }
+
+    footer {
+      text-align: center;
+      padding: 1rem;
+      background: #00435a;
+      color: white;
+    }
+
+    .social-icons a {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      text-decoration: none;
+      color: #333;
+      margin: 0 1rem;
+    }
+
+    .social-icons a:hover {
+      color: #0290c0;
+    }
+
+    .social-icons a img {
+      width: 30px;
+      height: 30px;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <a href="index.html">
+      <img src="img/logo.png" alt="Logo">
+    </a>
+    <nav class="nav-links">
+      <a href="#portfolio">Portfolio</a>
+      <a href="#about">O mnie</a>
+      <a href="#contact">Kontakt</a>
+    </nav>
+  </header>
+
+  <section class="main-content">
+    <img src="img/adamek.png" alt="AdameK">
+    <h1>Adam "AdameK" Wiśniewski</h1>
+    <p>Twórca - Montażysta - Budowniczy marek</p>
+  </section>
+
+  <section id="portfolio" class="portfolio">
+    <h2>Portfolio</h2>
+    <div class="grid">
+      <a href="tworca1.html" class="card">
+        <img src="img/tworca1.png" alt="Twórca 1">
+        <h3>Narszociak</h3>
+        <p>Zobacz projekty →</p>
+      </a>
+      <a href="tworca2.html" class="card">
+        <img src="img/tworca2.png" alt="Twórca 2">
+        <h3>Boruciak</h3>
+        <p>Zobacz projekty →</p>
+      </a>
+      <a href="tworca3.html" class="card">
+        <img src="img/tworca3.png" alt="Twórca 3">
+        <h3>Abra Games</h3>
+        <p>Zobacz projekty →</p>
+      </a>
+      <a href="tworca4.html" class="card">
+        <img src="img/tworca4.png" alt="Twórca 4">
+        <h3>Abra plus</h3>
+        <p>Zobacz projekty →</p>
+      </a>
+    </div>
+  </section>
+
+  <section id="about" class="about">
+    <h2>O mnie</h2>
+    <p>W 2014 roku rozpocząłem swoją przygodę z tworzeniem wideo, nagrywając i montując filmy, które publikowałem na YouTube. Kilka lat później zacząłem tworzyć fanarty dla popularnych twórców, takich jak Rojo, Husiek, IsamuxPompa czy MrHunterBright. Obecnie współpracuję z wieloma czołowymi polskimi influencerami, rozwijając swoje umiejętności i doświadczenie w branży kreatywnej.</p>
+  </section>
+
+  <section id="contact" class="contact">
+    <h2>Kontakt</h2>
+    <div class="contact-info">
+      <p>Adam Wiśniewski</p>
+      <p>Email: adamwisniak@o2.pl</p>
+    </div>
+    <div class="social-icons" style="text-align: center;">
+      <a href="https://www.youtube.com/@adameklive" target="_blank">
+        <img src="img/YouTube.png" alt="YouTube">
+        <span>YouTube</span>
+      </a>
+      <a href="https://www.instagram.com/adamekig/" target="_blank">
+        <img src="img/instagram.png" alt="Instagram">
+        <span>Instagram</span>
+      </a>
+      <a href="https://www.tiktok.com/@adameklive" target="_blank">
+        <img src="img/TikTok.png" alt="TikTok">
+        <span>TikTok</span>
+      </a>
+    </div>
+  </section>
+
+  <footer>
+    &copy; 2025 AdameK – Wszelkie prawa zastrzeżone
+  </footer>
+
+</body>
+</html>
