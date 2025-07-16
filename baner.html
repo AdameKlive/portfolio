@@ -1,29 +1,42 @@
+<!DOCTYPE html>
 <html lang="pl">
 <head>
   <meta charset="UTF-8">
-  <title>Rotator banerów OBS</title>
+  <title>Rotacyjny Baner</title>
   <style>
-    body, html { margin: 0; padding: 0; width: 100vw; height: 100vh; }
-    #frame { width: 100vw; height: 100vh; border: none; }
+    body {
+      margin: 0;
+      padding: 0;
+    }
+    .banner {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+    video {
+      display: block;
+      max-width: 100%;
+      height: auto;
+    }
   </style>
 </head>
 <body>
-  <iframe id="frame" src="https://adameklive.pl/baner.html" frameborder="0"></iframe>
-  <script>
-    const urls = [
-      { url: "https://adameklive.pl/baner.html", time: 15000 }, // 15 sekund
-      { url: "https://pokeavalar.pl/baner.html", time: 21000 }  // 21 sekund
-      { url: "https://blankwhitescreen.com/", time: 21000 } 
+  <div class="banner">
+    <video autoplay muted loop playsinline id="myVideo">
+      <source src="baner.webm" type="video/webm">
+      Twoja przeglądarka nie obsługuje wideo.
+    </video>
+  </div>
 
-    ];
-    let i = 0;
-    function next() {
-      i = (i + 1) % urls.length;
-      document.getElementById('frame').src = urls[i].url;
-      setTimeout(next, urls[i].time);
-    }
-    // Start po pierwszym interwale (bo pierwszy już się wyświetla)
-    setTimeout(next, urls[0].time);
+  <script>
+    const video = document.getElementById("myVideo");
+    video.addEventListener("contextmenu", (e) => {
+      e.preventDefault(); // blokuje menu kontekstowe
+    });
+
+    // Opcjonalnie: blokuj cały prawy klik na stronie
+    // document.addEventListener("contextmenu", e => e.preventDefault());
   </script>
 </body>
 </html>
