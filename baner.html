@@ -16,10 +16,10 @@
       { url: "https://pokeavalar.pl/baner.html", time: 21 }  // 21 sekund
     ];
 
-    const pauseDuration = 120; // przerwa po pełnym cyklu (w sekundach)
+    const pauseDuration = 300; // przerwa po pełnym cyklu (w sekundach)
 
     let currentIndex = 0;
-    let frame = document.getElementById('frame');
+    const frame = document.getElementById('frame');
 
     function showNextBanner() {
       if (currentIndex >= urls.length) {
@@ -27,24 +27,25 @@
         frame.style.display = 'none';
         frame.src = '';
         currentIndex = 0;
-        setTimeout(startCycle, pauseDuration * 1000); // odpal po przerwie
+        setTimeout(startCycle, pauseDuration * 1000);
         return;
       }
 
-      frame.src = urls[currentIndex].url;
+      const current = urls[currentIndex];
+      frame.src = current.url;
       frame.style.display = 'block';
 
+      // Czekaj tyle sekund, ile trwa obecny baner, a potem przejdź do następnego
       setTimeout(() => {
         currentIndex++;
         showNextBanner();
-      }, urls[currentIndex].time * 1000); // konwersja sekund -> ms
+      }, current.time * 1000);
     }
 
     function startCycle() {
-      showNextBanner(); // uruchom rotację
+      showNextBanner();
     }
 
-    // Startujemy po załadowaniu
     startCycle();
   </script>
 </body>
