@@ -13,7 +13,6 @@
       color: #333;
     }
 
-    /* Pasek nawigacyjny – sticky */
     header {
       background: #00435a;
       color: white;
@@ -53,9 +52,8 @@
       text-decoration: underline;
     }
 
-    /* Sekcja About - pełna szerokość tła */
     .about-header {
-      background: #02a3da; /* Kolor tła */
+      background: #02a3da;
       color: white;
       padding: 3rem 2rem;
       text-align: center;
@@ -113,6 +111,47 @@
       margin-bottom: 1rem;
     }
 
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+
+    .gallery img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 12px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease;
+      cursor: pointer;
+    }
+
+    .gallery img:hover {
+      transform: scale(1.05);
+    }
+
+    .expanded-image {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+    }
+
+    .expanded-image img {
+      max-width: 90%;
+      max-height: 90%;
+      object-fit: contain;
+    }
+
+    /* Sekcja "Zobacz też" z suwakiem */
     .also {
       margin-top: 3rem;
       padding: 2rem;
@@ -120,46 +159,89 @@
       background-color: #02a3da;
       border-radius: 12px;
       width: 100%;
+      position: relative;
     }
 
     .also h3 {
       font-size: 1.5rem;
       color: #fff;
+      margin-bottom: 1rem;
     }
 
-    .creators-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    .slider-wrapper {
+      position: relative;
+      display: flex;
+      align-items: center;
+      margin-top: 1rem;
+      max-width: 100%;
+      overflow: hidden;
+      padding: 0 50px;
+    }
+
+    .creators-scroll {
+      display: flex;
       gap: 1rem;
-      justify-items: left;
+      overflow-x: auto;
+      scroll-behavior: smooth;
+      padding: 1rem 0;
+      margin: 0 -50px;
     }
 
     .creator-tile {
-      background: white;
-      border-radius: 16px;
-      padding: 1rem;
+      flex: 0 0 160px;
       text-align: center;
+      background: white;
+      border-radius: 12px;
+      padding: 0.5rem;
       box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-      transition: transform 0.2s;
       text-decoration: none;
       color: inherit;
-    }
-
-    .creator-tile:hover {
-      transform: scale(1.05);
+      transition: none;
+      z-index: 1;
     }
 
     .creator-tile img {
-      width: 150px;
-      height: 150px;
+      width: 100%;
+      height: 120px;
       object-fit: cover;
-      border-radius: 12px;
+      border-radius: 8px;
       margin-bottom: 0.5rem;
     }
 
     .creator-tile span {
       display: block;
       font-weight: bold;
+    }
+
+    .slider-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(2, 163, 218, 0.9);
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      cursor: pointer;
+      font-size: 1.2rem;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 10;
+    }
+
+    .slider-btn.left {
+      left: 10px;
+    }
+
+    .slider-btn.right {
+      right: 10px;
+    }
+
+    .slider-btn:hover {
+      background: rgba(2, 144, 192, 0.95);
     }
 
     footer {
@@ -189,47 +271,6 @@
     .scroll-to-top:focus {
       outline: none;
     }
-
-    .gallery {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 1rem;
-      margin-top: 2rem;
-    }
-
-    .gallery img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      border-radius: 12px;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-      transition: transform 0.3s ease;
-    }
-
-    .gallery img:hover {
-      transform: scale(1.05);
-      cursor: pointer;
-    }
-
-    /* Powiększający się obraz */
-    .expanded-image {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.8);
-      display: none;
-      justify-content: center;
-      align-items: center;
-      z-index: 9999;
-    }
-
-    .expanded-image img {
-      max-width: 90%;
-      max-height: 90%;
-      object-fit: contain;
-    }
   </style>
 </head>
 <body>
@@ -241,11 +282,11 @@
   </nav>
 </header>
 
-<!-- Sekcja "About" -->
 <section class="about-header">
   <h1>SharQ</h1>
   <p class="about-description">
-Stworzyłem serię animacji oraz banerów informacyjnych inspirowanych stylistyką Persona 5. Skupiałem się na dynamicznych efektach, kontrastowych kolorach i wyrazistej typografii, aby materiały wizualnie wspierały charakter twórcy i przyciągały uwagę widzów.  </p>
+    Stworzyłem serię animacji oraz banerów informacyjnych inspirowanych stylistyką Persona 5. Skupiałem się na dynamicznych efektach, kontrastowych kolorach i wyrazistej typografii, aby materiały wizualnie wspierały charakter twórcy i przyciągały uwagę widzów.
+  </p>
 </section>
 
 <section class="content">
@@ -254,7 +295,6 @@ Stworzyłem serię animacji oraz banerów informacyjnych inspirowanych stylistyk
     <iframe src="https://drive.google.com/file/d/18lTkhzYBF_Tkvym2rXHO_AoqHnrrpPCj/preview" allowfullscreen></iframe>
   </div>
 
-  <!-- Sekcja galerii -->
   <section class="gallery">
     <img src="img/grafika1.png" alt="Praca 1" onclick="expandImage(this)">
     <img src="img/grafika2.png" alt="Praca 2" onclick="expandImage(this)">
@@ -262,42 +302,40 @@ Stworzyłem serię animacji oraz banerów informacyjnych inspirowanych stylistyk
     <img src="img/grafika4.png" alt="Praca 4" onclick="expandImage(this)">
   </section>
 
-  <!-- Sekcja "Zobacz też" -->
+  <!-- Sekcja "Zobacz też" z suwakiem -->
   <div class="also">
     <h3>Zobacz też:</h3>
-    <div class="creators-grid">
-      <a href="narszociak.html" class="creator-tile">
-        <img src="img/tworca1.png" alt="Twórca 1" />
-        <span>Narszociak</span>
-      </a>
-      <a href="boruciak.html" class="creator-tile">
-        <img src="img/tworca2.png" alt="Twórca 2" />
-        <span>Boruciak</span>
-      </a>
-      <a href="abragames.html" class="creator-tile">
-        <img src="img/tworca3.png" alt="Twórca 3" />
-        <span>Abra Games</span>
-      </a>
-      <a href="abraplus.html" class="creator-tile">
-        <img src="img/tworca4.png" alt="Twórca 4" />
-        <span>Abra plus</span>
-      </a>
+    <div class="slider-wrapper">
+      <button class="slider-btn left">&lt;</button>
+      <div class="creators-scroll" id="creators-grid"></div>
+      <button class="slider-btn right">&gt;</button>
     </div>
   </div>
 </section>
 
-<footer>
-  © 2025 AdameKlive. Wszystkie prawa zastrzeżone.
-</footer>
-
-<button class="scroll-to-top" onclick="window.scrollTo({ top: 0, behavior: 'smooth' })">↑</button>
-
-<!-- Powiększone zdjęcie -->
-<div class="expanded-image" onclick="closeExpandedImage()">
-  <img id="expanded-img" src="" alt="Powiększone zdjęcie">
-</div>
-
+<script src="creators.js"></script>
 <script>
+  const grid = document.getElementById("creators-grid");
+  const current = "sharq.html";
+
+  creators
+    .filter(c => c.link !== current)
+    .forEach(c => {
+      const a = document.createElement("a");
+      a.href = c.link;
+      a.className = "creator-tile";
+      a.innerHTML = `<img src="${c.img}" alt="${c.name}" /><span>${c.name}</span>`;
+      grid.appendChild(a);
+    });
+
+  const scrollAmount = 170;
+  document.querySelector(".slider-btn.left").onclick = () => {
+    grid.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+  };
+  document.querySelector(".slider-btn.right").onclick = () => {
+    grid.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+  };
+
   function expandImage(imgElement) {
     var expandedImage = document.getElementById('expanded-img');
     expandedImage.src = imgElement.src;
@@ -308,6 +346,16 @@ Stworzyłem serię animacji oraz banerów informacyjnych inspirowanych stylistyk
     document.querySelector('.expanded-image').style.display = 'none';
   }
 </script>
+
+<footer>
+  © 2025 AdameKlive. Wszystkie prawa zastrzeżone.
+</footer>
+
+<button class="scroll-to-top" onclick="window.scrollTo({ top: 0, behavior: 'smooth' })">↑</button>
+
+<div class="expanded-image" onclick="closeExpandedImage()">
+  <img id="expanded-img" src="" alt="Powiększone zdjęcie">
+</div>
 
 </body>
 </html>

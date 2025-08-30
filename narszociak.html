@@ -13,7 +13,6 @@
       color: #333;
     }
 
-    /* Pasek nawigacyjny – sticky */
     header {
       background: #00435a;
       color: white;
@@ -54,7 +53,7 @@
     }
 
     .creator-header {
-      background: #02a3da; /* Kolor zmieniony na 02a3da */
+      background: #02a3da;
       color: white;
       padding: 3rem 2rem;
       text-align: center;
@@ -105,55 +104,97 @@
       margin-top: 1rem;
     }
 
-    /* Zmiany tutaj */
+    /* Sekcja "Zobacz też" z suwakiem */
     .also {
       margin-top: 3rem;
       padding: 2rem;
       text-align: left;
-      background-color: #02a3da; /* Tło zmienione na 02a3da */
+      background-color: #02a3da;
       border-radius: 12px;
       width: 100%;
+      position: relative;
     }
 
     .also h3 {
       font-size: 1.5rem;
       color: #fff;
+      margin-bottom: 1rem;
     }
 
-    .creators-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    .slider-wrapper {
+      position: relative;
+      display: flex;
+      align-items: center;
+      margin-top: 1rem;
+      max-width: 100%;
+      overflow: hidden;
+      padding: 0 50px;
+    }
+
+    .creators-scroll {
+      display: flex;
       gap: 1rem;
-      justify-items: left;
+      overflow-x: auto;
+      scroll-behavior: smooth;
+      padding: 1rem 0;
+      margin: 0 -50px;
     }
 
     .creator-tile {
-      background: white;
-      border-radius: 16px;
-      padding: 1rem;
+      flex: 0 0 160px;
       text-align: center;
+      background: white;
+      border-radius: 12px;
+      padding: 0.5rem;
       box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-      transition: transform 0.2s;
       text-decoration: none;
       color: inherit;
-    }
-
-    .creator-tile:hover {
-      transform: scale(1.05);
-	  
+      transition: none;
+      z-index: 1;
     }
 
     .creator-tile img {
-      width: 150px;
-      height: 150px;
+      width: 100%;
+      height: 120px;
       object-fit: cover;
-      border-radius: 12px;
+      border-radius: 8px;
       margin-bottom: 0.5rem;
     }
 
     .creator-tile span {
       display: block;
       font-weight: bold;
+    }
+
+    .slider-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(2, 163, 218, 0.9);
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      cursor: pointer;
+      font-size: 1.2rem;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 10;
+    }
+
+    .slider-btn.left {
+      left: 10px;
+    }
+
+    .slider-btn.right {
+      right: 10px;
+    }
+
+    .slider-btn:hover {
+      background: rgba(2, 144, 192, 0.95);
     }
 
     footer {
@@ -203,7 +244,8 @@
 <section class="creator-header">
   <h1>Narszociak</h1>
   <p class="creator-description">
-Odpowiadałem za montaż dynamicznych kompilacji z transmisji na żywo, skupiając się na najzabawniejszych, najbardziej emocjonujących i zaskakujących momentach streamów. Celem było oddanie energii i atmosfery transmisji – tak, by widz oglądający klipy poczuł się, jakby był na żywo. Wykorzystywałem szybkie cięcia, zmiany tempa oraz dynamiczną ścieżkę dźwiękową, by podkreślić intensywność materiału.  </p>
+    Odpowiadałem za montaż dynamicznych kompilacji z transmisji na żywo, skupiając się na najzabawniejszych, najbardziej emocjonujących i zaskakujących momentach streamów. Celem było oddanie energii i atmosfery transmisji – tak, by widz oglądający klipy poczuł się, jakby był na żywo. Wykorzystywałem szybkie cięcia, zmiany tempa oraz dynamiczną ścieżkę dźwiękową, by podkreślić intensywność materiału.
+  </p>
 </section>
 
 <section class="content">
@@ -216,29 +258,40 @@ Odpowiadałem za montaż dynamicznych kompilacji z transmisji na żywo, skupiaj�
     <a class="button" href="https://www.youtube.com/playlist?list=PLaw4wNDsrwM3i1jgx_1P4VAmPKw0gs0Lq" target="_blank">Zobacz więcej</a>
   </div>
 
-  <!-- Sekcja "Zobacz też" -->
+  <!-- Sekcja "Zobacz też" z suwakiem -->
   <div class="also">
     <h3>Zobacz też:</h3>
-    <div class="creators-grid">
-      <a href="boruciak.html" class="creator-tile">
-        <img src="img/tworca2.png" alt="Twórca 2" />
-        <span>Boruciak</span>
-      </a>
-      <a href="abragames.html" class="creator-tile">
-        <img src="img/tworca3.png" alt="Twórca 3" />
-        <span>Abra Games</span>
-      </a>
-      <a href="abraplus.html" class="creator-tile">
-        <img src="img/tworca4.png" alt="Twórca 4" />
-        <span>Abra plus</span>
-      </a>
-	<a href="sharq.html" class="creator-tile">
-        <img src="img/tworca5.png" alt="Twórca 5" />
-        <span>SharQ</span>
-      </a>  
+    <div class="slider-wrapper">
+      <button class="slider-btn left">&lt;</button>
+      <div class="creators-scroll" id="creators-grid"></div>
+      <button class="slider-btn right">&gt;</button>
     </div>
   </div>
 </section>
+
+<script src="creators.js"></script>
+<script>
+  const grid = document.getElementById("creators-grid");
+  const current = "narszociak.html";
+
+  creators
+    .filter(c => c.link !== current)
+    .forEach(c => {
+      const a = document.createElement("a");
+      a.href = c.link;
+      a.className = "creator-tile";
+      a.innerHTML = `<img src="${c.img}" alt="${c.name}" /><span>${c.name}</span>`;
+      grid.appendChild(a);
+    });
+
+  const scrollAmount = 170;
+  document.querySelector(".slider-btn.left").onclick = () => {
+    grid.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+  };
+  document.querySelector(".slider-btn.right").onclick = () => {
+    grid.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+  };
+</script>
 
 <footer>
   © 2025 AdameKlive. Wszystkie prawa zastrzeżone.

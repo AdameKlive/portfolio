@@ -15,7 +15,6 @@
       transition: background 0.3s;
     }
 
-    /* Pasek nawigacyjny – sticky */
     header {
       background: #00435a;
       color: white;
@@ -55,14 +54,13 @@
       text-decoration: underline;
     }
 
-    /* Sekcja główna z tłem */
     .main-content {
       display: flex;
       flex-direction: column;
       align-items: center;
       text-align: center;
       padding: 4rem;
-      background: #02a3da; /* Blue background */
+      background: #02a3da;
     }
 
     .main-content img {
@@ -83,7 +81,6 @@
       margin: 0.5rem 0;
     }
 
-    /* Sekcja portfolio */
     .portfolio {
       text-align: center;
       padding: 3rem;
@@ -98,7 +95,7 @@
 
     .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Ustawienie maksymalnie 4 kafelków na szerokość */
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
       gap: 1rem;
       max-width: 1200px;
       margin: auto;
@@ -113,6 +110,7 @@
       transition: transform 0.2s;
       text-decoration: none;
       color: inherit;
+      position: relative; /* potrzebne dla badge */
     }
 
     .card:hover {
@@ -123,17 +121,38 @@
       width: 100%;
       border-radius: 12px;
     }
+	
+	.card img {
+	width: 100%;
+	height: 200px;        /* wspólna wysokość dla wszystkich */
+	object-fit: cover;    /* przycina obrazki, zachowując proporcje */
+	border-radius: 12px;  /* zaokrąglenie jak reszta */
+	}
 
-    /* Sekcja "O mnie" */
+
+    /* Badge */
+    .badge {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background: #ff4444;
+      color: white;
+      font-size: 0.8rem;
+      font-weight: bold;
+      padding: 0.3rem 0.6rem;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    }
+
     .about {
-      background: #02a3da; /* Blue background */
+      background: #02a3da;
       padding: 3rem;
       text-align: center;
     }
 
     .about-text {
-      max-width: 900px; /* Maksymalna szerokość tekstu */
-      margin: 0 auto;   /* Wyśrodkowanie tekstu */
+      max-width: 900px;
+      margin: 0 auto;
     }
 
     .about h2 {
@@ -146,7 +165,6 @@
       color: white;
     }
 
-    /* Sekcja kontakt */
     .contact {
       padding: 5rem 2rem;
       background: #f4f4f4;
@@ -171,7 +189,7 @@
     .contact .contact-info p {
       font-size: 1.2rem;
       color: #333;
-      margin: 0.5rem 0; /* Dodane marginesy między wierszami */
+      margin: 0.5rem 0;
     }
 
     .contact form {
@@ -255,6 +273,12 @@
   <section id="portfolio" class="portfolio">
     <h2>Portfolio</h2>
     <div class="grid">
+      <a href="slayproxx.html" class="card">
+        <span class="badge">Współpraca trwa</span>
+        <img src="img/tworca6.png" alt="Twórca 6">
+        <h3>Slayproxx</h3>
+        <p>Zobacz projekty →</p>
+      </a>
       <a href="narszociak.html" class="card">
         <img src="img/tworca1.png" alt="Twórca 1">
         <h3>Narszociak</h3>
@@ -275,7 +299,7 @@
         <h3>Abra plus</h3>
         <p>Zobacz projekty →</p>
       </a>
-	  <a href="sharq.html" class="card">
+      <a href="sharq.html" class="card">
         <img src="img/tworca5.png" alt="Twórca 5">
         <h3>SharQ</h3>
         <p>Zobacz projekty →</p>
