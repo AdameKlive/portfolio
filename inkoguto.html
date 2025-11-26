@@ -149,6 +149,8 @@
     }
   }
 
+  /* --- ZOBACZ TEŻ – POPRAWIONA SEKCJA --- */
+
   .also {
     margin-top: 3rem;
     padding: 2rem;
@@ -165,7 +167,7 @@
     margin-bottom: 1rem;
   }
 
-.slider-wrapper {
+  .slider-wrapper {
     position: relative;
     display: flex;
     align-items: center;
@@ -173,16 +175,21 @@
     max-width: 100%;
     overflow: hidden;
     padding: 0 50px;
-}
+  }
 
-.creators-scroll {
+  .creators-scroll {
     display: flex;
     gap: 1rem;
     overflow-x: auto;
     scroll-behavior: smooth;
     padding: 1rem 0;
-    margin: 0 -50px;
-}
+    margin: 0;
+    scrollbar-width: none; /* Firefox */
+  }
+
+  .creators-scroll::-webkit-scrollbar {
+    display: none; /* Chrome, Edge */
+  }
 
   .creator-tile {
     flex: 0 0 160px;
@@ -210,7 +217,7 @@
     font-weight: bold;
   }
 
-.slider-btn {
+  .slider-btn {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
@@ -227,19 +234,19 @@
     align-items: center;
     justify-content: center;
     z-index: 10;
-}
+  }
 
-.slider-btn.left {
+  .slider-btn.left {
     left: 10px;
-}
+  }
 
-slider-btn.right {
+  .slider-btn.right {
     right: 10px;
-}
+  }
 
-.slider-btn:hover {
+  .slider-btn:hover {
     background: rgba(2, 144, 192, 0.95);
-}
+  }
 
 </style>
 </head>
@@ -261,7 +268,6 @@ slider-btn.right {
 
 <section class="content">
 
-  <!-- YouTube -->
   <div class="video-group">
     <div class="video-container">
       <iframe src="https://www.youtube.com/embed/6FscjVB3yX4" allowfullscreen></iframe>
@@ -278,9 +284,12 @@ slider-btn.right {
   <!-- Zobacz też -->
   <div class="also">
     <h3>Zobacz też:</h3>
+
     <div class="slider-wrapper">
       <button class="slider-btn left">&lt;</button>
+
       <div class="creators-scroll" id="creators-grid"></div>
+
       <button class="slider-btn right">&gt;</button>
     </div>
   </div>
@@ -301,9 +310,11 @@ slider-btn.right {
       });
 
     const scrollAmount = 170;
+
     document.querySelector(".slider-btn.left").onclick = () => {
       grid.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
     };
+
     document.querySelector(".slider-btn.right").onclick = () => {
       grid.scrollBy({ left: scrollAmount, behavior: 'smooth' });
     };
