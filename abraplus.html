@@ -128,24 +128,26 @@
       margin-bottom: 1rem;
     }
 
-    .slider-wrapper {
-      position: relative;
-      display: flex;
-      align-items: center;
-      margin-top: 1rem;
-      max-width: 100%;
-      overflow: hidden;
-      padding: 0 50px;
-    }
+.slider-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+}
 
-    .creators-scroll {
-      display: flex;
-      gap: 1rem;
-      overflow-x: auto;
-      scroll-behavior: smooth;
-      padding: 1rem 0;
-      margin: 0 -50px;
-    }
+.creators-scroll {
+    display: flex;
+    gap: 1rem;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    margin: 0;
+    padding: 1rem 0;
+    scrollbar-width: none; /* Firefox */
+}
+
+.creators-scroll::-webkit-scrollbar {
+    display: none; /* Chrome, Edge */
+}
 
     .creator-tile {
       flex: 0 0 160px;
@@ -312,3 +314,4 @@
 
 </body>
 </html>
+
