@@ -4,362 +4,99 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>SharQ | AdameK</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
-  <style>
-    body {
-      font-family: 'Inter', sans-serif;
-      margin: 0;
-      background: #f4f4f4;
-      color: #333;
-    }
-
-    header {
-      background: #00435a;
-      color: white;
-      padding: 1rem 2rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      position: sticky;
-      top: 0;
-      z-index: 100;
-    }
-
-    header img {
-      width: 50px;
-      cursor: pointer;
-    }
-
-    h1 {
-      margin: 0;
-      font-size: 2.5rem;
-      text-align: center;
-      flex-grow: 1;
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 1rem;
-    }
-
-    .nav-links a {
-      text-decoration: none;
-      color: white;
-      font-weight: bold;
-    }
-
-    .nav-links a:hover {
-      text-decoration: underline;
-    }
-
-    .about-header {
-      background: #02a3da;
-      color: white;
-      padding: 3rem 2rem;
-      text-align: center;
-      width: 100%;
-      position: relative;
-      left: 50%;
-      right: 50%;
-      margin-left: -50vw;
-      margin-right: -50vw;
-      box-sizing: border-box;
-    }
-
-    .about-header h1 {
-      margin: 0;
-      font-size: 2.5rem;
-    }
-
-    .about-description {
-      font-size: 1.1rem;
-      margin-top: 1rem;
-      color: #eaf8ff;
-      max-width: 800px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-
-    .content {
-      max-width: 1000px;
-      margin: auto;
-      padding: 2rem;
-    }
-
-    .videos {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1rem;
-      justify-content: center;
-    }
-
-    .videos iframe {
-      flex: 1 1 45%;
-      height: 300px;
-      border: none;
-      border-radius: 12px;
-    }
-
-    .button {
-      background: #02a3da;
-      color: white;
-      padding: 0.8rem 1.2rem;
-      border-radius: 8px;
-      text-decoration: none;
-      display: inline-block;
-      margin-top: 1rem;
-      margin-bottom: 1rem;
-    }
-
-    .gallery {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 1rem;
-      margin-top: 2rem;
-    }
-
-    .gallery img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      border-radius: 12px;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-      transition: transform 0.3s ease;
-      cursor: pointer;
-    }
-
-    .gallery img:hover {
-      transform: scale(1.05);
-    }
-
-    .expanded-image {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.8);
-      display: none;
-      justify-content: center;
-      align-items: center;
-      z-index: 9999;
-    }
-
-    .expanded-image img {
-      max-width: 90%;
-      max-height: 90%;
-      object-fit: contain;
-    }
-
-    /* Sekcja "Zobacz też" z suwakiem */
-    .also {
-      margin-top: 3rem;
-      padding: 2rem;
-      text-align: left;
-      background-color: #02a3da;
-      border-radius: 12px;
-      width: 100%;
-      position: relative;
-    }
-
-    .also h3 {
-      font-size: 1.5rem;
-      color: #fff;
-      margin-bottom: 1rem;
-    }
-
-.slider-wrapper {
-    position: relative;
-    display: flex;
-    align-items: center;
-    overflow: hidden;
-}
-
-.creators-scroll {
-    display: flex;
-    gap: 1rem;
-    overflow-x: auto;
-    scroll-behavior: smooth;
-    margin: 0;
-    padding: 1rem 0;
-    scrollbar-width: none; /* Firefox */
-}
-
-.creators-scroll::-webkit-scrollbar {
-    display: none; /* Chrome, Edge */
-}
-
-
-    .creator-tile {
-      flex: 0 0 160px;
-      text-align: center;
-      background: white;
-      border-radius: 12px;
-      padding: 0.5rem;
-      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-      text-decoration: none;
-      color: inherit;
-      transition: none;
-      z-index: 1;
-    }
-
-    .creator-tile img {
-      width: 100%;
-      height: 120px;
-      object-fit: cover;
-      border-radius: 8px;
-      margin-bottom: 0.5rem;
-    }
-
-    .creator-tile span {
-      display: block;
-      font-weight: bold;
-    }
-
-    .slider-btn {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      background: rgba(2, 163, 218, 0.9);
-      color: white;
-      border: none;
-      border-radius: 50%;
-      width: 40px;
-      height: 40px;
-      cursor: pointer;
-      font-size: 1.2rem;
-      font-weight: bold;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 10;
-    }
-
-    .slider-btn.left {
-      left: 10px;
-    }
-
-    .slider-btn.right {
-      right: 10px;
-    }
-
-    .slider-btn:hover {
-      background: rgba(2, 144, 192, 0.95);
-    }
-
-    footer {
-      text-align: center;
-      padding: 1rem;
-      background: #00435a;
-      color: white;
-      margin-top: 3rem;
-    }
-
-    .scroll-to-top {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background-color: #02a3da;
-      color: white;
-      border: none;
-      border-radius: 50%;
-      width: 50px;
-      height: 50px;
-      display: none;
-      justify-content: center;
-      align-items: center;
-      cursor: pointer;
-    }
-
-    .scroll-to-top:focus {
-      outline: none;
-    }
-  </style>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="creator.css">
+  <link rel="icon" type="image/png" href="favicon.png">
 </head>
 <body>
 
-<header>
-  <a href="index.html"><img src="img/logo.png" alt="Logo" /></a>
-  <nav class="nav-links">
-    <a href="index.html#kontakt">Kontakt</a>
-  </nav>
-</header>
+<nav>
+  <a href="index.html"><img src="img/logo.png" alt="AdameK"></a>
+  <a href="index.html" class="back-btn">Powrót do portfolio</a>
+</nav>
 
-<section class="about-header">
-  <h1>SharQ</h1>
-  <p class="about-description">
-    Stworzyłem serię animacji oraz banerów informacyjnych inspirowanych stylistyką Persona 5. Skupiałem się na dynamicznych efektach, kontrastowych kolorach i wyrazistej typografii, aby materiały wizualnie wspierały charakter twórcy i przyciągały uwagę widzów.
-  </p>
+<section class="creator-hero">
+  <div class="hero-bg-img" style="background-image: url('img/tworca5.png')"></div>
+  <div class="hero-gradient"></div>
+  <div class="hero-content">
+    <div class="hero-tag">Projekt</div>
+    <h1>SharQ</h1>
+    <p>Stworzyłem serię animacji oraz banerów informacyjnych inspirowanych stylistyką Persona 5. Skupiałem się na dynamicznych efektach, kontrastowych kolorach i wyrazistej typografii — tak, by materiały wizualnie wspierały charakter twórcy i przyciągały uwagę widzów.</p>
+  </div>
 </section>
 
-<section class="content">
-  <div class="videos">
-    <iframe src="https://drive.google.com/file/d/1KYbchJlamK1_jN_pWMWgrvgfV0prowqa/preview" allowfullscreen></iframe>
-    <iframe src="https://drive.google.com/file/d/18lTkhzYBF_Tkvym2rXHO_AoqHnrrpPCj/preview" allowfullscreen></iframe>
-  </div>
+<div class="content">
 
-  <section class="gallery">
-    <img src="img/grafika1.png" alt="Praca 1" onclick="expandImage(this)">
-    <img src="img/grafika2.png" alt="Praca 2" onclick="expandImage(this)">
-    <img src="img/grafika3.png" alt="Praca 3" onclick="expandImage(this)">
-    <img src="img/grafika4.png" alt="Praca 4" onclick="expandImage(this)">
-  </section>
-
-  <!-- Sekcja "Zobacz też" z suwakiem -->
-  <div class="also">
-    <h3>Zobacz też:</h3>
-    <div class="slider-wrapper">
-      <button class="slider-btn left">&lt;</button>
-      <div class="creators-scroll" id="creators-grid"></div>
-      <button class="slider-btn right">&gt;</button>
+  <span class="section-label">Animacje</span>
+  <h2>Animacje wideo</h2>
+  <div class="video-group">
+    <div class="video-wrap">
+      <iframe src="https://drive.google.com/file/d/1KYbchJlamK1_jN_pWMWgrvgfV0prowqa/preview" allowfullscreen loading="lazy"></iframe>
+    </div>
+    <div class="video-wrap">
+      <iframe src="https://drive.google.com/file/d/18lTkhzYBF_Tkvym2rXHO_AoqHnrrpPCj/preview" allowfullscreen loading="lazy"></iframe>
     </div>
   </div>
-</section>
+
+  <hr class="divider">
+
+  <span class="section-label">Grafiki</span>
+  <h2>Banery i grafiki</h2>
+  <div class="gallery">
+    <div class="gallery-item" onclick="openLightbox(this)">
+      <img src="img/grafika1.png" alt="Grafika 1">
+    </div>
+    <div class="gallery-item" onclick="openLightbox(this)">
+      <img src="img/grafika2.png" alt="Grafika 2">
+    </div>
+    <div class="gallery-item" onclick="openLightbox(this)">
+      <img src="img/grafika3.png" alt="Grafika 3">
+    </div>
+    <div class="gallery-item" onclick="openLightbox(this)">
+      <img src="img/grafika4.png" alt="Grafika 4">
+    </div>
+  </div>
+
+  <div class="also-section">
+    <h3>Zobacz też</h3>
+    <div class="slider-wrapper">
+      <button class="slider-btn left">‹</button>
+      <div class="creators-scroll" id="creators-grid"></div>
+      <button class="slider-btn right">›</button>
+    </div>
+  </div>
+</div>
+
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+  <img id="lightbox-img" src="" alt="Powiększona grafika">
+</div>
+
+<footer>© 2025 AdameK — Wszelkie prawa zastrzeżone</footer>
+<button id="scroll-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
 
 <script src="creators.js"></script>
 <script>
   const grid = document.getElementById("creators-grid");
-  const current = "sharq.html";
+  creators.filter(c => c.link !== "sharq.html").forEach(c => {
+    const a = document.createElement("a");
+    a.href = c.link; a.className = "creator-tile";
+    a.innerHTML = `<img src="${c.img}" alt="${c.name}" loading="lazy"><span>${c.name}</span>`;
+    grid.appendChild(a);
+  });
+  document.querySelector(".slider-btn.left").onclick = () => grid.scrollBy({left:-170,behavior:'smooth'});
+  document.querySelector(".slider-btn.right").onclick = () => grid.scrollBy({left:170,behavior:'smooth'});
+  window.addEventListener('scroll', () => {
+    document.getElementById('scroll-top').classList.toggle('visible', window.scrollY > 300);
+  });
 
-  creators
-    .filter(c => c.link !== current)
-    .forEach(c => {
-      const a = document.createElement("a");
-      a.href = c.link;
-      a.className = "creator-tile";
-      a.innerHTML = `<img src="${c.img}" alt="${c.name}" /><span>${c.name}</span>`;
-      grid.appendChild(a);
-    });
-
-  const scrollAmount = 170;
-  document.querySelector(".slider-btn.left").onclick = () => {
-    grid.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
-  };
-  document.querySelector(".slider-btn.right").onclick = () => {
-    grid.scrollBy({ left: scrollAmount, behavior: 'smooth' });
-  };
-
-  function expandImage(imgElement) {
-    var expandedImage = document.getElementById('expanded-img');
-    expandedImage.src = imgElement.src;
-    document.querySelector('.expanded-image').style.display = 'flex';
+  function openLightbox(el) {
+    document.getElementById('lightbox-img').src = el.querySelector('img').src;
+    document.getElementById('lightbox').classList.add('open');
   }
-
-  function closeExpandedImage() {
-    document.querySelector('.expanded-image').style.display = 'none';
+  function closeLightbox() {
+    document.getElementById('lightbox').classList.remove('open');
   }
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
 </script>
-
-<footer>
-  © 2025 AdameKlive. Wszystkie prawa zastrzeżone.
-</footer>
-
-<button class="scroll-to-top" onclick="window.scrollTo({ top: 0, behavior: 'smooth' })">↑</button>
-
-<div class="expanded-image" onclick="closeExpandedImage()">
-  <img id="expanded-img" src="" alt="Powiększone zdjęcie">
-</div>
-
 </body>
 </html>
-

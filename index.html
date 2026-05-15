@@ -4,341 +4,996 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>AdameK – Portfolio</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
   <link rel="icon" type="image/png" href="favicon.png">
   <style>
-    body {
-      font-family: 'Inter', sans-serif;
-      margin: 0;
-      background: #f4f4f4;
-      color: #333;
-      transition: background 0.3s;
+    :root {
+      --bg: #080a14;
+      --bg2: #0d1026;
+      --card: rgba(255,255,255,0.04);
+      --accent: #00c8ff;
+      --accent-dim: rgba(0,200,255,0.12);
+      --accent-glow: rgba(0,200,255,0.28);
+      --text: #edf2ff;
+      --muted: #8892b0;
+      --border: rgba(255,255,255,0.08);
+      --r: 14px;
     }
 
-    header {
-      background: #00435a;
-      color: white;
-      padding: 1rem 2rem;
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      overflow-x: hidden;
+      line-height: 1.6;
+      scrollbar-width: none;
+    }
+    body::-webkit-scrollbar { display: none; }
+
+    /* NAV */
+    #navbar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      padding: 1rem 2.5rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      position: sticky;
-      top: 0;
-      z-index: 100;
+      background: transparent;
+      transition: background 0.4s, padding 0.3s, border-color 0.4s;
+      border-bottom: 1px solid transparent;
+    }
+    #navbar.scrolled {
+      background: rgba(8,10,20,0.85);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom-color: var(--border);
+      padding: 0.75rem 2.5rem;
     }
 
-    header img {
-      width: 50px;
-      cursor: pointer;
-    }
+    #navbar img { width: 42px; cursor: pointer; }
 
-    h1 {
-      margin: 0;
-      font-size: 2.5rem;
-      text-align: center;
-      flex-grow: 1;
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 1rem;
-    }
-
+    .nav-links { display: flex; gap: 2rem; align-items: center; }
     .nav-links a {
       text-decoration: none;
-      color: white;
-      font-weight: bold;
+      color: var(--muted);
+      font-size: 0.875rem;
+      font-weight: 500;
+      letter-spacing: 0.3px;
+      transition: color 0.2s;
     }
-
-    .nav-links a:hover {
-      text-decoration: underline;
-    }
-
-    .main-content {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-      padding: 4rem;
-      background: #02a3da;
-    }
-
-    .main-content img {
-      width: 150px;
-      border-radius: 50%;
-      margin-bottom: 1rem;
-    }
-
-    .main-content h1 {
-      font-size: 2.5rem;
-      margin: 0;
-      color: white;
-    }
-
-    .main-content p {
-      font-size: 1.2rem;
-      color: #fff;
-      margin: 0.5rem 0;
-    }
-
-    .portfolio {
-      text-align: center;
-      padding: 3rem;
-      background: #f4f4f4;
-    }
-
-    .portfolio h2 {
-      font-size: 3rem;
-      color: #333;
-      margin-bottom: 2rem;
-    }
-
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-      gap: 1rem;
-      max-width: 1200px;
-      margin: auto;
-    }
-
-    .card {
-      background: white;
-      border-radius: 16px;
-      padding: 1rem;
-      text-align: center;
-      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-      transition: transform 0.2s;
-      text-decoration: none;
-      color: inherit;
-      position: relative; /* potrzebne dla badge */
-    }
-
-    .card:hover {
-      transform: scale(1.05);
-    }
-
-    .card img {
-      width: 100%;
-      border-radius: 12px;
-    }
-	
-	.card img {
-	width: 100%;
-	height: 200px;        /* wspólna wysokość dla wszystkich */
-	object-fit: cover;    /* przycina obrazki, zachowując proporcje */
-	border-radius: 12px;  /* zaokrąglenie jak reszta */
-	}
-
-
-    /* Badge */
-    .badge {
-      position: absolute;
-      top: 10px;
-      left: 10px;
-      background: #ff4444;
-      color: white;
-      font-size: 0.8rem;
-      font-weight: bold;
-      padding: 0.3rem 0.6rem;
+    .nav-links a:hover { color: var(--accent); }
+    .nav-links .nav-cta {
+      background: var(--accent-dim);
+      border: 1px solid rgba(0,200,255,0.25);
+      color: var(--accent);
+      padding: 0.45rem 1.1rem;
       border-radius: 8px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+      font-weight: 600;
     }
+    .nav-links .nav-cta:hover { background: rgba(0,200,255,0.2); color: var(--accent); }
 
-    .about {
-      background: #02a3da;
-      padding: 3rem;
-      text-align: center;
-    }
-
-    .about-text {
-      max-width: 900px;
-      margin: 0 auto;
-    }
-
-    .about h2 {
-      font-size: 2rem;
-      margin-bottom: 1rem;
-      color: white;
-    }
-
-    .about p {
-      color: white;
-    }
-
-    .contact {
-      padding: 5rem 2rem;
-      background: #f4f4f4;
-      text-align: center;
-    }
-
-    .contact h2 {
-      font-size: 3rem;
-      margin-bottom: 2rem;
-      color: #333;
-    }
-
-    .contact .contact-info {
+    /* HERO */
+    .hero {
+      position: relative;
+      min-height: 100vh;
       display: flex;
-      flex-direction: column;
+      align-items: center;
       justify-content: center;
-      align-items: center;
-      gap: 0.5rem;
-      margin-bottom: 3rem;
-    }
-
-    .contact .contact-info p {
-      font-size: 1.2rem;
-      color: #333;
-      margin: 0.5rem 0;
-    }
-
-    .contact form {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 1.5rem;
-      width: 100%;
-      max-width: 600px;
-      margin: 0 auto;
-    }
-
-    input, textarea {
-      padding: 1rem;
-      width: 100%;
-      border-radius: 8px;
-      border: 1px solid #ddd;
-      font-size: 1rem;
-    }
-
-    button {
-      background: #02a3da;
-      color: white;
-      padding: 1rem 3rem;
-      border-radius: 8px;
-      border: none;
-      cursor: pointer;
-      font-size: 1.2rem;
-      transition: background 0.3s;
-    }
-
-    button:hover {
-      background: #0290c0;
-    }
-
-    footer {
+      overflow: hidden;
+      padding: 6rem 2rem 4rem;
       text-align: center;
-      padding: 1rem;
-      background: #00435a;
-      color: white;
     }
 
-    .social-icons a {
+    .hero-video {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.15;
+    }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 90% 70% at 50% 0%, rgba(0,200,255,0.12), transparent 60%),
+        linear-gradient(to bottom, rgba(8,10,20,0.55), rgba(8,10,20,0.85) 80%, var(--bg));
+    }
+
+    .hero-grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.018) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.018) 1px, transparent 1px);
+      background-size: 44px 44px;
+      mask-image: radial-gradient(ellipse at center, black 20%, transparent 75%);
+      -webkit-mask-image: radial-gradient(ellipse at center, black 20%, transparent 75%);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 860px;
+    }
+
+    .hero-avatar-wrap {
+      position: relative;
+      display: inline-block;
+      margin-bottom: 2rem;
+    }
+
+    .hero-avatar-ring {
+      position: absolute;
+      inset: -5px;
+      border-radius: 50%;
+      background: conic-gradient(from 0deg, var(--accent) 0deg, transparent 120deg, var(--accent) 240deg, transparent 360deg);
+      animation: ring-spin 5s linear infinite;
+    }
+
+    .hero-avatar-mask {
+      position: absolute;
+      inset: -1px;
+      border-radius: 50%;
+      background: var(--bg);
+    }
+
+    @keyframes ring-spin { to { transform: rotate(360deg); } }
+
+    .hero-avatar {
+      width: 158px;
+      height: 158px;
+      border-radius: 50%;
+      object-fit: cover;
+      position: relative;
+      z-index: 1;
+      display: block;
+    }
+
+    .hero-badge {
       display: inline-flex;
       align-items: center;
       gap: 0.5rem;
+      background: var(--accent-dim);
+      border: 1px solid rgba(0,200,255,0.28);
+      color: var(--accent);
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      padding: 0.38rem 1rem;
+      border-radius: 100px;
+      margin-bottom: 1.5rem;
+    }
+    .hero-badge::before {
+      content: '';
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 6px var(--accent);
+      animation: pulse 2s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(0.8); }
+    }
+
+    .hero h1 {
+      font-size: clamp(2.6rem, 6vw, 4.8rem);
+      font-weight: 900;
+      line-height: 1.05;
+      margin-bottom: 1rem;
+      background: linear-gradient(140deg, #ffffff 30%, var(--accent) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-sub {
+      font-size: 1.15rem;
+      color: var(--muted);
+      margin-bottom: 2.5rem;
+      font-weight: 400;
+      letter-spacing: 0.3px;
+    }
+
+    .hero-cta {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #080a14;
+      padding: 0.9rem 2.2rem;
+      border-radius: 9px;
       text-decoration: none;
-      color: #333;
-      margin: 0 1rem;
+      font-weight: 700;
+      font-size: 0.9rem;
+      letter-spacing: 0.3px;
+      transition: transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 0 28px var(--accent-glow);
+    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 0 44px var(--accent-glow); }
+
+    .btn-outline {
+      border: 1px solid var(--border);
+      color: var(--muted);
+      padding: 0.9rem 2.2rem;
+      border-radius: 9px;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.9rem;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .btn-outline:hover { border-color: var(--accent); color: var(--text); }
+
+    .scroll-hint {
+      position: absolute;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.4rem;
+      color: rgba(136,146,176,0.5);
+      font-size: 0.65rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      animation: float 2.2s ease-in-out infinite;
+    }
+    .scroll-hint::after {
+      content: '';
+      width: 1px; height: 38px;
+      background: linear-gradient(to bottom, rgba(136,146,176,0.5), transparent);
+    }
+    @keyframes float {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50% { transform: translateX(-50%) translateY(7px); }
     }
 
-    .social-icons a:hover {
-      color: #0290c0;
+    /* STATS */
+    .stats {
+      background: var(--bg2);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 5rem 2rem;
     }
 
-    .social-icons a img {
-      width: 30px;
-      height: 30px;
+    .stats-grid {
+      max-width: 820px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      text-align: center;
+    }
+
+    .stat-card {
+      background: linear-gradient(160deg, rgba(255,255,255,0.055) 0%, rgba(255,255,255,0.018) 100%);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 2.25rem 1.5rem 2rem;
+      position: relative;
+      overflow: hidden;
+      transition: border-color 0.35s, transform 0.35s, box-shadow 0.35s;
+    }
+    .stat-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 50%;
+      transform: translateX(-50%);
+      width: 55%;
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--accent), transparent);
+      opacity: 0.6;
+    }
+    .stat-card::after {
+      content: '';
+      position: absolute;
+      top: -40px; left: 50%;
+      transform: translateX(-50%);
+      width: 100px; height: 80px;
+      background: radial-gradient(ellipse, var(--accent-glow), transparent 70%);
+      opacity: 0;
+      transition: opacity 0.35s;
+    }
+    .stat-card:hover {
+      border-color: rgba(0,200,255,0.35);
+      transform: translateY(-5px);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.35);
+    }
+    .stat-card:hover::after { opacity: 1; }
+
+    .stat-icon {
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+      display: block;
+      line-height: 1;
+      filter: drop-shadow(0 0 8px var(--accent-glow));
+    }
+
+    .stat-num {
+      font-size: 3rem;
+      font-weight: 900;
+      line-height: 1;
+      margin-bottom: 0.6rem;
+      font-variant-numeric: tabular-nums;
+      background: linear-gradient(140deg, #ffffff 25%, var(--accent) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .stat-label {
+      color: var(--muted);
+      font-size: 0.76rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1.8px;
+    }
+
+    /* SECTIONS */
+    .section-header {
+      text-align: center;
+      margin-bottom: 3.5rem;
+    }
+
+    .section-tag {
+      display: inline-block;
+      color: var(--accent);
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      margin-bottom: 0.75rem;
+    }
+
+    .section-title {
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 800;
+    }
+
+    /* PORTFOLIO */
+    #portfolio {
+      padding: 6rem 2rem;
+      background: var(--bg);
+    }
+
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
+      gap: 1.5rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .portfolio-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--r);
+      overflow: hidden;
+      text-decoration: none;
+      color: inherit;
+      display: block;
+      position: relative;
+      transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
+    }
+
+    .portfolio-card:hover {
+      border-color: rgba(0,200,255,0.35);
+      transform: translateY(-5px);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+    }
+
+    .card-img-wrap {
+      position: relative;
+      overflow: hidden;
+      aspect-ratio: 16/9;
+    }
+
+    .card-img-wrap img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s, filter 0.3s;
+      display: block;
+    }
+
+    .portfolio-card:hover .card-img-wrap img {
+      transform: scale(1.07);
+      filter: brightness(0.55);
+    }
+
+    .card-hover-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0,10,30,0.95) 0%, transparent 55%);
+      display: flex;
+      align-items: flex-end;
+      padding: 1.25rem;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .card-hover-overlay span {
+      color: var(--accent);
+      font-weight: 700;
+      font-size: 0.85rem;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+    }
+    .portfolio-card:hover .card-hover-overlay { opacity: 1; }
+
+    .card-badge {
+      position: absolute;
+      top: 12px; left: 12px;
+      background: rgba(230,50,50,0.9);
+      color: white;
+      font-size: 0.68rem;
+      font-weight: 700;
+      padding: 0.28rem 0.7rem;
+      border-radius: 6px;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      backdrop-filter: blur(4px);
+    }
+
+    .card-body {
+      padding: 1.25rem 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .card-body h3 {
+      font-size: 1.1rem;
+      font-weight: 700;
+    }
+
+    .card-tags {
+      display: flex;
+      gap: 0.4rem;
+      flex-wrap: wrap;
+    }
+
+    .tag {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 0.7rem;
+      font-weight: 600;
+      padding: 0.2rem 0.55rem;
+      border-radius: 5px;
+    }
+
+    /* ABOUT */
+    #about {
+      background: var(--bg2);
+      padding: 6rem 2rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .about-inner {
+      max-width: 1060px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1.5fr;
+      gap: 5rem;
+      align-items: center;
+    }
+
+    .about-img-wrap {
+      position: relative;
+    }
+
+    .about-img-wrap::before {
+      content: '';
+      position: absolute;
+      inset: -1px;
+      border-radius: calc(var(--r) + 1px);
+      background: linear-gradient(135deg, rgba(0,200,255,0.4), transparent 50%, transparent);
+      z-index: 0;
+    }
+
+    .about-img-wrap::after {
+      content: '';
+      position: absolute;
+      bottom: -30px; right: -30px;
+      width: 55%; height: 55%;
+      background: radial-gradient(circle, var(--accent-glow), transparent 70%);
+      z-index: -1;
+    }
+
+    .about-img-wrap img {
+      width: 100%;
+      border-radius: var(--r);
+      display: block;
+      position: relative;
+      z-index: 1;
+    }
+
+    .about-text .section-tag { display: block; }
+    .about-text h2 {
+      font-size: clamp(1.9rem, 3.5vw, 2.6rem);
+      font-weight: 800;
+      line-height: 1.2;
+      margin-bottom: 1.5rem;
+    }
+    .about-text p {
+      color: var(--muted);
+      line-height: 1.85;
+      margin-bottom: 1.25rem;
+      font-size: 0.975rem;
+    }
+
+    .skills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      margin-top: 1.75rem;
+    }
+
+    .skill-pill {
+      background: var(--accent-dim);
+      border: 1px solid rgba(0,200,255,0.22);
+      color: var(--accent);
+      font-size: 0.78rem;
+      font-weight: 600;
+      padding: 0.4rem 1rem;
+      border-radius: 100px;
+    }
+
+    /* SERVICES */
+    #services {
+      background: var(--bg);
+      padding: 6rem 2rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      max-width: 1060px;
+      margin: 0 auto;
+    }
+
+    .service-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--r);
+      padding: 2.25rem 2rem;
+      transition: border-color 0.3s, transform 0.3s;
+    }
+
+    .service-card:hover {
+      border-color: rgba(0,200,255,0.3);
+      transform: translateY(-4px);
+    }
+
+    .service-icon {
+      font-size: 2.4rem;
+      margin-bottom: 1.25rem;
+      display: block;
+    }
+
+    .service-card h3 {
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+    }
+
+    .service-card p {
+      color: var(--muted);
+      font-size: 0.9rem;
+      line-height: 1.75;
+    }
+
+    /* CONTACT */
+    #contact {
+      background: var(--bg2);
+      padding: 6rem 2rem;
+      border-top: 1px solid var(--border);
+      text-align: center;
+    }
+
+    #contact .section-tag { display: block; margin-bottom: 0.75rem; }
+
+    #contact .section-title { margin-bottom: 0.75rem; }
+
+    .contact-sub {
+      color: var(--muted);
+      font-size: 0.975rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .contact-email {
+      display: inline-block;
+      font-size: 1.2rem;
+      color: var(--accent);
+      font-weight: 600;
+      text-decoration: none;
+      border: 1px solid rgba(0,200,255,0.28);
+      padding: 1rem 2.5rem;
+      border-radius: 12px;
+      background: var(--accent-dim);
+      margin-bottom: 2.5rem;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .contact-email:hover { background: rgba(0,200,255,0.18); transform: scale(1.02); }
+
+    .contact-socials {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .social-btn {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.8rem 1.6rem;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: var(--card);
+      text-decoration: none;
+      color: var(--muted);
+      font-size: 0.875rem;
+      font-weight: 500;
+      transition: border-color 0.2s, color 0.2s, transform 0.2s;
+    }
+    .social-btn:hover { border-color: var(--accent); color: var(--text); transform: translateY(-2px); }
+    .social-btn img { width: 22px; height: 22px; }
+
+    /* FOOTER */
+    footer {
+      text-align: center;
+      padding: 2rem;
+      background: var(--bg);
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 0.82rem;
+    }
+
+    /* SCROLL TOP */
+    #scroll-top {
+      position: fixed;
+      bottom: 1.5rem; right: 1.5rem;
+      width: 46px; height: 46px;
+      background: var(--accent);
+      color: #080a14;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 1.1rem;
+      font-weight: 800;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 22px var(--accent-glow);
+      transition: transform 0.2s;
+      z-index: 200;
+    }
+    #scroll-top.visible { display: flex; }
+    #scroll-top:hover { transform: translateY(-3px); }
+
+    /* REVEAL */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.65s ease, transform 0.65s ease;
+    }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    /* MOBILE */
+    @media (max-width: 900px) {
+      .stats-grid { grid-template-columns: repeat(2, 1fr); }
+      .services-grid { grid-template-columns: 1fr; }
+      .about-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+      .about-img-wrap { display: none; }
+    }
+    @media (max-width: 640px) {
+      .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+      .stats-grid .stat-card:first-child { grid-column: 1 / -1; }
+      .nav-links a:not(.nav-cta) { display: none; }
     }
   </style>
 </head>
 <body>
 
-  <header>
-    <a href="index.html">
-      <img src="img/logo.png" alt="Logo">
-    </a>
-    <nav class="nav-links">
-      <a href="#portfolio">Portfolio</a>
-      <a href="#about">O mnie</a>
-      <a href="#contact">Kontakt</a>
-    </nav>
-  </header>
-
-  <section class="main-content">
-    <img src="img/adamek.png" alt="AdameK">
-    <h1>Adam "AdameK" Wiśniewski</h1>
-    <p>Twórca - Montażysta - Grafik komputerowy</p>
-  </section>
-
-  <section id="portfolio" class="portfolio">
-    <h2>Portfolio</h2>
-    <div class="grid">
-      <a href="slayproxx" class="card">
-        <span class="badge">Współpraca trwa</span>
-        <img src="img/tworca6.png" alt="Twórca 6">
-        <h3>Slayproxx</h3>
-        <p>Zobacz projekty →</p>
-      </a>
-	  <a href="inkoguto" class="card">
-        <img src="img/tworca7.png" alt="Twórca 7">
-        <h3>Inkoguto</h3>
-        <p>Zobacz projekty →</p>
-      </a>
-      <a href="narszociak" class="card">
-        <img src="img/tworca1.png" alt="Twórca 1">
-        <h3>Narszociak</h3>
-        <p>Zobacz projekty →</p>
-      </a>
-      <a href="boruciak" class="card">
-        <img src="img/tworca2.png" alt="Twórca 2">
-        <h3>Boruciak</h3>
-        <p>Zobacz projekty →</p>
-      </a>
-      <a href="abragames" class="card">
-        <img src="img/tworca3.png" alt="Twórca 3">
-        <h3>Abra Games</h3>
-        <p>Zobacz projekty →</p>
-      </a>
-      <a href="abraplus" class="card">
-        <img src="img/tworca4.png" alt="Twórca 4">
-        <h3>Abra plus</h3>
-        <p>Zobacz projekty →</p>
-      </a>
-      <a href="sharq" class="card">
-        <img src="img/tworca5.png" alt="Twórca 5">
-        <h3>SharQ</h3>
-        <p>Zobacz projekty →</p>
-      </a>
-    </div>
-  </section>
-
-  <section id="about" class="about">
-    <h2>O mnie</h2>
-    <div class="about-text">
-      <p>W 2014 roku rozpocząłem swoją przygodę z tworzeniem wideo, nagrywając i montując filmy, które publikowałem na YouTube. Kilka lat później zacząłem tworzyć fanarty dla popularnych twórców, takich jak Rojo, Husiek, IsamuxPompa czy MrHunterBright. Obecnie współpracuję z wieloma czołowymi polskimi influencerami, rozwijając swoje umiejętności i doświadczenie w branży kreatywnej.</p>
-    </div>
-  </section>
-
-  <section id="contact" class="contact">
-    <h2>Kontakt</h2>
-    <div class="contact-info">
-      <p>Adam Wiśniewski</p>
-      <p>Email: business@adameklive.pl</p>
-    </div>
-<div class="social-icons" style="text-align: center;">
-  <a href="https://adameklive.pl/socialmedia" target="_blank">
-    <img src="img/socialmedia.png" alt="Social Media">
-    <span>Moje Social Media</span>
+<nav id="navbar">
+  <a href="index.html">
+    <img src="img/logo.png" alt="AdameK">
   </a>
+  <div class="nav-links">
+    <a href="#portfolio">Portfolio</a>
+    <a href="#about">O mnie</a>
+    <a href="#services">Usługi</a>
+    <a href="#contact" class="nav-cta">Kontakt</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <video class="hero-video" autoplay muted loop playsinline>
+    <source src="baner.webm" type="video/webm">
+  </video>
+  <div class="hero-overlay"></div>
+  <div class="hero-grid"></div>
+
+  <div class="hero-content">
+    <div class="hero-avatar-wrap">
+      <div class="hero-avatar-ring"></div>
+      <div class="hero-avatar-mask"></div>
+      <img src="img/adamek.png" alt="AdameK" class="hero-avatar">
+    </div>
+    <div class="hero-badge">Dostępny do współpracy</div>
+    <h1>Adam "AdameK" Wiśniewski</h1>
+    <p class="hero-sub">Montażysta · Grafik komputerowy · Twórca treści</p>
+    <div class="hero-cta">
+      <a href="#portfolio" class="btn-primary">Zobacz Portfolio</a>
+      <a href="#contact" class="btn-outline">Skontaktuj się</a>
+    </div>
+  </div>
+
+  <div class="scroll-hint">Scroll</div>
+</section>
+
+<div class="stats">
+  <div class="stats-grid">
+    <div class="reveal stat-card">
+      <span class="stat-icon">▶</span>
+      <div class="stat-num" data-mode="fixed" data-value="11M+">0</div>
+      <div class="stat-label">Wyświetleń na filmach</div>
+    </div>
+    <div class="reveal stat-card">
+      <span class="stat-icon">♥</span>
+      <div class="stat-num" data-mode="fixed" data-value="2M+">0</div>
+      <div class="stat-label">Polubień filmów</div>
+    </div>
+    <div class="reveal stat-card">
+      <span class="stat-icon">✦</span>
+      <div class="stat-num" data-target="10" data-suffix="+">0</div>
+      <div class="stat-label">Lat doświadczenia</div>
+    </div>
+  </div>
 </div>
 
-      </a>
-    </div>
-  </section>
+<section id="portfolio">
+  <div class="section-header reveal">
+    <div class="section-tag">Moje projekty</div>
+    <h2 class="section-title">Portfolio</h2>
+  </div>
 
-  <footer>
-    &copy; 2025 AdameK – Wszelkie prawa zastrzeżone
-  </footer>
+  <div class="portfolio-grid">
+    <a href="slayproxx" class="portfolio-card reveal">
+      <div class="card-img-wrap">
+        <img src="img/tworca6.png" alt="Slayproxx">
+        <span class="card-badge">Współpraca trwa</span>
+        <div class="card-hover-overlay"><span>Otwórz projekty →</span></div>
+      </div>
+      <div class="card-body">
+        <h3>Slayproxx</h3>
+        <div class="card-tags">
+          <span class="tag">YouTube</span>
+          <span class="tag">TikTok</span>
+        </div>
+      </div>
+    </a>
+
+    <a href="graf" class="portfolio-card reveal">
+      <div class="card-img-wrap">
+        <img src="img/tworca8.png" alt="Graf">
+        <span class="card-badge">Współpraca trwa</span>
+        <div class="card-hover-overlay"><span>Otwórz projekty →</span></div>
+      </div>
+      <div class="card-body">
+        <h3>Graf</h3>
+        <div class="card-tags">
+          <span class="tag">YouTube</span>
+          <span class="tag">Hard Cuts</span>
+        </div>
+      </div>
+    </a>
+
+    <a href="inkoguto" class="portfolio-card reveal">
+      <div class="card-img-wrap">
+        <img src="img/tworca7.png" alt="Inkoguto">
+        <div class="card-hover-overlay"><span>Otwórz projekty →</span></div>
+      </div>
+      <div class="card-body">
+        <h3>Inkoguto</h3>
+        <div class="card-tags">
+          <span class="tag">YouTube</span>
+          <span class="tag">News</span>
+        </div>
+      </div>
+    </a>
+
+    <a href="narszociak" class="portfolio-card reveal">
+      <div class="card-img-wrap">
+        <img src="img/tworca1.png" alt="Narszociak">
+        <div class="card-hover-overlay"><span>Otwórz projekty →</span></div>
+      </div>
+      <div class="card-body">
+        <h3>Narszociak</h3>
+        <div class="card-tags">
+          <span class="tag">YouTube</span>
+          <span class="tag">Live</span>
+        </div>
+      </div>
+    </a>
+
+    <a href="boruciak" class="portfolio-card reveal">
+      <div class="card-img-wrap">
+        <img src="img/tworca2.png" alt="Boruciak">
+        <div class="card-hover-overlay"><span>Otwórz projekty →</span></div>
+      </div>
+      <div class="card-body">
+        <h3>Boruciak</h3>
+        <div class="card-tags">
+          <span class="tag">YouTube</span>
+          <span class="tag">Rozrywka</span>
+        </div>
+      </div>
+    </a>
+
+    <a href="abragames" class="portfolio-card reveal">
+      <div class="card-img-wrap">
+        <img src="img/tworca3.png" alt="Abra Games">
+        <div class="card-hover-overlay"><span>Otwórz projekty →</span></div>
+      </div>
+      <div class="card-body">
+        <h3>Abra Games</h3>
+        <div class="card-tags">
+          <span class="tag">YouTube</span>
+          <span class="tag">Gaming</span>
+        </div>
+      </div>
+    </a>
+
+    <a href="abraplus" class="portfolio-card reveal">
+      <div class="card-img-wrap">
+        <img src="img/tworca4.png" alt="Abra plus">
+        <div class="card-hover-overlay"><span>Otwórz projekty →</span></div>
+      </div>
+      <div class="card-body">
+        <h3>Abra plus</h3>
+        <div class="card-tags">
+          <span class="tag">YouTube</span>
+          <span class="tag">Shorts</span>
+        </div>
+      </div>
+    </a>
+
+    <a href="sharq" class="portfolio-card reveal">
+      <div class="card-img-wrap">
+        <img src="img/tworca5.png" alt="SharQ">
+        <div class="card-hover-overlay"><span>Otwórz projekty →</span></div>
+      </div>
+      <div class="card-body">
+        <h3>SharQ</h3>
+        <div class="card-tags">
+          <span class="tag">Animacje</span>
+          <span class="tag">Grafika</span>
+        </div>
+      </div>
+    </a>
+  </div>
+</section>
+
+<section id="about">
+  <div class="about-inner">
+    <div class="about-img-wrap reveal">
+      <img src="img/adamek.png" alt="Adam Wiśniewski">
+    </div>
+    <div class="about-text reveal">
+      <div class="section-tag">O mnie</div>
+      <h2>Tworzę treści,<br>które zostają w pamięci</h2>
+      <p>W 2014 roku rozpocząłem swoją przygodę z tworzeniem wideo, nagrywając i montując filmy publikowane na YouTube. Kilka lat później zacząłem tworzyć fanarty dla popularnych twórców — Rojo, Husiek, IsamuxPompa, MrHunterBright.</p>
+      <p>Dziś współpracuję z czołowymi polskimi influencerami, rozwijając swoje umiejętności na wielu platformach. Specjalizuję się w dynamicznym montażu wideo, tworzeniu short-form contentu oraz projektowaniu grafiki dopasowanej do brandu twórcy.</p>
+      <div class="skills">
+        <span class="skill-pill">Montaż wideo</span>
+        <span class="skill-pill">Short Form Content</span>
+        <span class="skill-pill">Grafika komputerowa</span>
+        <span class="skill-pill">Motion Graphics</span>
+        <span class="skill-pill">YouTube</span>
+        <span class="skill-pill">TikTok</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="services">
+  <div class="section-header reveal">
+    <div class="section-tag">Co oferuję</div>
+    <h2 class="section-title">Usługi</h2>
+  </div>
+  <div class="services-grid">
+    <div class="service-card reveal">
+      <span class="service-icon">🎬</span>
+      <h3>Montaż wideo</h3>
+      <p>Profesjonalny montaż filmów YouTube — od dynamicznych shortów po pełnometrażowe produkcje. Każde cięcie z myślą o retencji widza.</p>
+    </div>
+    <div class="service-card reveal">
+      <span class="service-icon">📱</span>
+      <h3>Short Form Content</h3>
+      <p>Tworzenie angażujących shortów na TikTok i YouTube Shorts. Wybieram najlepsze momenty ze streamów i przekształcam je w viralowy content.</p>
+    </div>
+    <div class="service-card reveal">
+      <span class="service-icon">🎨</span>
+      <h3>Grafika komputerowa</h3>
+      <p>Projektowanie thumbnailów, banerów, grafik i animacji dopasowanych do identyfikacji wizualnej twórcy i wyróżniających się w feedzie.</p>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="section-tag">Napisz do mnie</div>
+  <h2 class="section-title reveal">Kontakt</h2>
+  <p class="contact-sub reveal">Masz projekt? Chętnie porozmawiam.</p>
+  <a href="mailto:business@adameklive.pl" class="contact-email reveal">business@adameklive.pl</a>
+  <div class="contact-socials reveal">
+    <a href="https://adameklive.pl/socialmedia" target="_blank" class="social-btn">
+      <img src="img/socialmedia.png" alt="">
+      Wszystkie social media
+    </a>
+  </div>
+</section>
+
+<footer>
+  &copy; 2025 AdameK — Wszelkie prawa zastrzeżone
+</footer>
+
+<button id="scroll-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<script>
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    navbar.classList.toggle('scrolled', window.scrollY > 60);
+    document.getElementById('scroll-top').classList.toggle('visible', window.scrollY > 400);
+  });
+
+  const revealObs = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 70);
+      }
+    });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+
+  const counterObs = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      const el = entry.target.querySelector('.stat-num');
+      if (!el) return;
+      if (el.dataset.mode === 'fixed') {
+        el.textContent = el.dataset.value;
+        counterObs.unobserve(entry.target);
+        return;
+      }
+      const target = parseInt(el.dataset.target);
+      const suffix = el.dataset.suffix || '';
+      let count = 0;
+      const step = Math.max(1, Math.ceil(target / 45));
+      const timer = setInterval(() => {
+        count = Math.min(count + step, target);
+        el.textContent = count + suffix;
+        if (count >= target) clearInterval(timer);
+      }, 35);
+      counterObs.unobserve(entry.target);
+    });
+  }, { threshold: 0.5 });
+  document.querySelectorAll('.stats .reveal').forEach(el => counterObs.observe(el));
+</script>
 
 </body>
 </html>

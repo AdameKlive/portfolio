@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Inkoguto | AdameK</title>
+  <title>Graf | AdameK</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="creator.css">
   <link rel="icon" type="image/png" href="favicon.png">
@@ -16,29 +16,29 @@
 </nav>
 
 <section class="creator-hero">
-  <div class="hero-bg-img" style="background-image: url('img/tworca7.png')"></div>
+  <div class="hero-bg-img" style="background-image: url('img/tworca8.png')"></div>
   <div class="hero-gradient"></div>
   <div class="hero-content">
-    <div class="hero-tag">Projekt</div>
-    <h1>Inkoguto</h1>
-    <p>Montuję filmy informacyjne i newsowe w formie rozrywkowej. Każdy materiał łączy rzetelne informacje z dynamicznym montażem, który utrzymuje uwagę widza przez cały czas trwania odcinka.</p>
+    <div class="hero-tag">Współpraca trwa</div>
+    <h1>Graf</h1>
+    <p>Odpowiadam za hard cuty z długich zapisów transmisji na żywo. Przeglądam całe VOD-y i wycinam najlepsze momenty — emocjonalne, zabawne i najbardziej dynamiczne fragmenty. Gotowe cuty trafiają następnie do drugiego montażysty, który składa finalny materiał. Praca w zespole od podstaw.</p>
   </div>
 </section>
 
 <div class="content">
 
   <span class="section-label">YouTube</span>
-  <h2>Filmy informacyjne</h2>
+  <h2>Hard Cuty z VOD</h2>
   <div class="video-group">
     <div class="video-wrap">
-      <iframe src="https://www.youtube.com/embed/6FscjVB3yX4" allowfullscreen loading="lazy"></iframe>
+      <iframe src="https://www.youtube.com/embed/-KeqiNPpp_M?start=265" allowfullscreen loading="lazy"></iframe>
     </div>
     <div class="video-wrap">
-      <iframe src="https://www.youtube.com/embed/ZYSgR9lUk8s" allowfullscreen loading="lazy"></iframe>
+      <iframe src="https://www.youtube.com/embed/nxzLmYrWrfc" allowfullscreen loading="lazy"></iframe>
     </div>
   </div>
   <div class="btn-row">
-    <a class="btn btn-filled" href="https://www.youtube.com/playlist?list=PLaw4wNDsrwM37k97sP3HgDbJ6B7CIsHq6" target="_blank">Zobacz więcej</a>
+    <a class="btn btn-filled" href="https://www.youtube.com/@graf" target="_blank">Kanał Graf</a>
   </div>
 
   <div class="also-section">
@@ -57,7 +57,7 @@
 <script src="creators.js"></script>
 <script>
   const grid = document.getElementById("creators-grid");
-  creators.filter(c => c.link !== "inkoguto.html").forEach(c => {
+  creators.filter(c => c.link !== "graf.html").forEach(c => {
     const a = document.createElement("a");
     a.href = c.link; a.className = "creator-tile";
     a.innerHTML = `<img src="${c.img}" alt="${c.name}" loading="lazy"><span>${c.name}</span>`;
