@@ -1,73 +1,75 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Graf | AdameK</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="creator.css">
-  <link rel="icon" type="image/png" href="favicon.png">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Graf | AdameK</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="creator.css">
+<link rel="icon" type="image/png" href="favicon.png">
 </head>
 <body>
-
 <nav>
-  <a href="index.html"><img src="img/logo.png" alt="AdameK"></a>
-  <a href="index.html" class="back-btn">Powrót do portfolio</a>
+<a href="index.html"><img src="img/logo.png" alt="AdameK"></a>
+<a href="index.html" class="back-btn">Powrót do portfolio</a>
 </nav>
-
 <section class="creator-hero">
-  <div class="hero-bg-img" style="background-image: url('img/tworca8.png')"></div>
-  <div class="hero-gradient"></div>
-  <div class="hero-content">
-    <div class="hero-tag">Współpraca trwa</div>
-    <h1>Graf</h1>
-    <p>Odpowiadam za hard cuty z długich zapisów transmisji na żywo. Przeglądam całe VOD-y i wycinam najlepsze momenty - emocjonalne, zabawne i najbardziej dynamiczne fragmenty. Gotowe cuty trafiają następnie do drugiego montażysty, który składa finalny materiał. Praca w zespole od podstaw.</p>
-  </div>
+<div class="hero-bg-img" style="background-image: url('img/tworca8.png')"></div>
+<div class="hero-gradient"></div>
+<div class="hero-content">
+<div class="hero-tag">Współpraca trwa</div>
+<h1>Graf</h1>
+<p>Montuję pełne odcinki na kanał - od przeglądania surowego materiału, przez dobór momentów, po cięcie, dźwięk i grafiki. Robię też hard cuty z długich zapisów transmisji na żywo: przeglądam całe VOD-y i wycinam najlepsze fragmenty - emocjonalne, zabawne i najbardziej dynamiczne. Praca w zespole od podstaw.</p>
+</div>
 </section>
-
 <div class="content">
-
-  <span class="section-label">YouTube</span>
-  <h2>Hard Cuty z VOD</h2>
-  <div class="video-group">
-    <div class="video-wrap">
-      <iframe src="https://www.youtube.com/embed/-KeqiNPpp_M?start=265" allowfullscreen loading="lazy"></iframe>
-    </div>
-    <div class="video-wrap">
-      <iframe src="https://www.youtube.com/embed/nxzLmYrWrfc" allowfullscreen loading="lazy"></iframe>
-    </div>
-  </div>
-  <div class="btn-row">
-    <a class="btn btn-filled" href="https://www.youtube.com/@graf" target="_blank">Kanał Graf</a>
-  </div>
-
-  <div class="also-section">
-    <h3>Zobacz też</h3>
-    <div class="slider-wrapper">
-      <button class="slider-btn left">‹</button>
-      <div class="creators-scroll" id="creators-grid"></div>
-      <button class="slider-btn right">›</button>
-    </div>
-  </div>
+<span class="section-label">YouTube</span>
+<h2>Pełne montaże</h2>
+<div class="video-group">
+<div class="video-wrap">
+<iframe src="https://www.youtube.com/embed/GnXmocHjt3U" allowfullscreen loading="lazy"></iframe>
+</div>
 </div>
 
+<span class="section-label">YouTube</span>
+<h2>Hard cuty z VOD</h2>
+<div class="video-group">
+<div class="video-wrap">
+<iframe src="https://www.youtube.com/embed/-KeqiNPpp_M?start=265" allowfullscreen loading="lazy"></iframe>
+</div>
+<div class="video-wrap">
+<iframe src="https://www.youtube.com/embed/nxzLmYrWrfc" allowfullscreen loading="lazy"></iframe>
+</div>
+</div>
+
+<div class="btn-row">
+<a class="btn btn-filled" href="https://www.youtube.com/@graf" target="_blank">Kanał Graf</a>
+</div>
+<div class="also-section">
+<h3>Zobacz też</h3>
+<div class="slider-wrapper">
+<button class="slider-btn left">‹</button>
+<div class="creators-scroll" id="creators-grid"></div>
+<button class="slider-btn right">›</button>
+</div>
+</div>
+</div>
 <footer>© 2025 AdameK - Wszelkie prawa zastrzeżone</footer>
 <button id="scroll-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
-
 <script src="creators.js"></script>
 <script>
-  const grid = document.getElementById("creators-grid");
-  creators.filter(c => c.link !== "graf.html").forEach(c => {
-    const a = document.createElement("a");
-    a.href = c.link; a.className = "creator-tile";
-    a.innerHTML = `<img src="${c.img}" alt="${c.name}" loading="lazy"><span>${c.name}</span>`;
-    grid.appendChild(a);
-  });
-  document.querySelector(".slider-btn.left").onclick = () => grid.scrollBy({left:-170,behavior:'smooth'});
-  document.querySelector(".slider-btn.right").onclick = () => grid.scrollBy({left:170,behavior:'smooth'});
-  window.addEventListener('scroll', () => {
-    document.getElementById('scroll-top').classList.toggle('visible', window.scrollY > 300);
-  });
+const grid = document.getElementById("creators-grid");
+creators.filter(c => c.link !== "graf.html").forEach(c => {
+const a = document.createElement("a");
+a.href = c.link; a.className = "creator-tile";
+a.innerHTML = `<img src="${c.img}" alt="${c.name}" loading="lazy"><span>${c.name}</span>`;
+grid.appendChild(a);
+});
+document.querySelector(".slider-btn.left").onclick = () => grid.scrollBy({left:-170,behavior:'smooth'});
+document.querySelector(".slider-btn.right").onclick = () => grid.scrollBy({left:170,behavior:'smooth'});
+window.addEventListener('scroll', () => {
+document.getElementById('scroll-top').classList.toggle('visible', window.scrollY > 300);
+});
 </script>
 </body>
 </html>
